@@ -66,6 +66,25 @@ FF_factors_CumReturn %>%
   ggplot(aes(x = date, y = value, color = key)) +
   geom_line()
 
+# regressions
+library(quantmod)
+
+data = FF_factors
+
+FAANG <- c('FB', 'AMZN', 'AAPL', 'NFLX', 'GOOGL')
+for(i in 1:length(FAANG)) {
+  getSymbols(FAANG[i], from = "1979-12-01", to= "2019-12-31", periodicity = "monthly")
+  data <- as.data.frame(monthlyReturn(get(FAANG[i])[,6]) = 100)
+  data$ticker <- rep(FAANG[i], dim(data)[1])
+  data$date <- rownames(data)
+  rownames(data) <- NULL
+  
+  if(i == 1){stock_returns <- data[-1,]} else {stock_returns <- rbind(stock_returns, data[-1,])}
+}
+
+
+
+
 #----
 # end
 #----
