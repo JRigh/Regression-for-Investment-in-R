@@ -19,7 +19,7 @@ download.file(FF_data, temp, quiet = TRUE)
 FF_factors <- read_csv(unz(temp, "F-F_Research_Data_5_Factors_2x3_CSV"), skip = 3)
 # or 
 
-FF_factors <- read_csv('path/F-F_Research_Data_5_Factors_2x3.CSV')
+FF_factors <- read_csv('C:/Users/julia/OneDrive/Desktop/Coursera/Regression in R for investment/F-F_Research_Data_5_Factors_2x3.CSV')
 
 
 head(FF_factors)
@@ -135,7 +135,13 @@ MacroModel <- lm(quarterly.returns ~ GDPC1 + CPIAUCSL +DTB3 +DGS10 + DAAA +DBAA+
   broom::tidy()
   
 
+# Fama-MacBeth
 
+Nasdaq100_FF5Model <- read_csv(file = 'C:/Users/julia/OneDrive/Desktop/Coursera/Regression in R for investment/F-F_Research_Data_5_Factors_2x3.CSV')
+Nasdaq100_FF5Model <- Nasdaq100_FF5Model[, colSums(is.na(Nasdaq100_FF5Model)<120)]
+Nasdaq100_FF5Model <- Nasdaq100_FF5Model[-(1:240),]
+
+Nasdaq100 <- colnames(Nasdaq100_FF5Model)[-(1:7)]
 
 #----
 # end
